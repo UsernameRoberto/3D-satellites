@@ -132,6 +132,3 @@ I don't mind if you add or remove anything you like. I just share because it see
 Best whishes from Slovenia and thank you Cesium Ion. Your engine is PURE MAGIC. 
 
 by Roberto with ❤️
-
-<img width="1920" height="1080" alt="iss" src="https://github.com/UsernameRoberto/3D-satellites/blob/main/iss.png" />
-
