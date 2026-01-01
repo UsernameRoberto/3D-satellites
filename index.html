@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name='theme-color' content='#000000'>
+  <meta name='msapplication-navbutton-color' content='#000000'>
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="50" font-size="100" text-anchor="middle" dominant-baseline="middle" fill="Red">🛰️</text></svg>' />
+  <title>Satellite 3D Tracker Real-Time</title>
+<script src="https://www.ihome.si/Build/Cesium/Cesium.js"></script>
+<link href="https://www.ihome.si/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+<script src="satellite.min.js"></script>
+<link href="satellites-open.css" rel="stylesheet" />
+<script src="turf.min.js"></script>
+<script src="suncalc.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+</head>
+<body onload="init()">
+  <div id="preloader">Loading 3D scene...<image src="animation.gif"></image></div>
+<div id="area-info">
+  Flying over the Area of: <span style="font-family: 'Oxanium', sans-serif;" id="area-name">Checking...</span>
+</div>
+  <button title="Follow Satellite" id="followToggle">🚫</button>
+  <select id="satelliteDropdown" title="Select Satellite">
+  </select>
+<div id="telemetryContainer">
+  <div id="telemetry">
+  </div>
+</div>
+<button title="Telemetry Data" id="toggleTelemetryBtn"><i class="fas fa-cogs"></i></button>
+<div id="satContainer">
+  <input type="text" id="satSearch" placeholder="Search satellites...">
+  <div style="font-family: 'Oxanium', sans-serif;" class="scroller" id="satOverheadCount"></div>
+</div>
+<button title="Toggle Trails" id="toggleTrailsBtn"><i class="fas fa-satellite"></i></button>
+<div id="hardwareOverlay">
+  <button id="closeIframe">Close ×</button>
+ <div>
+SERVER POSITION
+ </div>
+</div>
+<div id="rotationControlsContainer" class="hidden">
+   <div id="rotationControls">
+    <label>
+      Rotate X: <input id="rotateX" type="range" min="-180" max="180" value="0" step="0.01"> 
+      <span id="rotateXValue">0°</span>
+    </label><br>
+    <label>
+      Rotate Y: <input id="rotateY" type="range" min="-180" max="180" value="0" step="0.01"> 
+      <span id="rotateYValue">0°</span>
+    </label><br>
+    <label>
+      Rotate Z: <input id="rotateZ" type="range" min="-180" max="180" value="0" step="0.01"> 
+      <span id="rotateZValue">0°</span>
+    </label>
+  </div>
+  </div>
+  <button title="Yaw, Pitch, Roll in Satellite Follow" id="toggleRotateBtn" class="fixed-right inactive"><i class="fas fa-cog"></i></button>
+  <div id="cesiumContainer"></div>
+  <script src="satellites-open.js"></script>
+
+</body>
+</html>
