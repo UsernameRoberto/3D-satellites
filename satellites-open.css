@@ -1,0 +1,675 @@
+ @font-face {
+        font-family: "Oxanium";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/oxanium/v20/RrQPboN_4yJ0JmiMUW7sIGjd1IA9G81JfkiFD3ULdw.woff2)
+                format("woff2");
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+                U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+                U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+        font-family: "Oxanium";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/oxanium/v20/RrQPboN_4yJ0JmiMUW7sIGjd1IA9G81JfkiLD3U.woff2)
+                format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+                U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+ html, body, #cesiumContainer {
+      width: 100%; 
+	  height: 100%; 
+	  margin: 0; 
+	  padding: 0; 
+	  overflow: hidden;
+	  font-family: 'Oxanium', sans-serif;
+	  background:black;
+    }
+    /* packages/widgets/Source/shared.css */
+#toggleTrailsBtn {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 150px;
+  width: 29px;
+  height: 29px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 0;
+  color: white;
+  padding: 0;
+  line-height: 29px;
+  text-align: center;
+
+  /* Active = red */
+  background: rgba(255, 0, 0, 0.9);
+}
+
+/* Hover when active = keep your white glow */
+#toggleTrailsBtn:hover:not(.inactive) {
+  border: 1px solid white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Inactive = grey gradient */
+#toggleTrailsBtn.inactive {
+  background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Inactive + hover = Cesium-like pale blue background and glow */
+#toggleTrailsBtn.inactive:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+#telemetryContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  z-index: 1000;
+  transition: transform 0.05s ease;
+  
+}
+#telemetryContainer.hidden {
+  transform: translateX(-100%); /* slide left but leave 40px space */
+}
+/* Telemetry panel */
+#telemetry {
+  
+  border: 2px solid #333;
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+  background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  ); 
+  color: white;
+  font-family: 'Oxanium', sans-serif;
+  font-size: 0.8em;
+  padding: 8px 12px;
+  border-radius: 0 0 0 0;
+  z-index: 1000;
+  white-space: pre-line;
+  min-width: 170px;
+}
+
+
+
+/* Button inside telemetry */
+#toggleTelemetryBtn {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 2;
+  left: 197px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 0 0 8px 0;
+  border: none;
+  background: rgba(255,0,0,0.9);
+  color: white;
+  transition: transform 0.3s ease, background 0.2s;
+  z-index: 1001;
+}
+
+#toggleTelemetryBtn.fixed-left {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  transform: none !important;
+}
+
+/* Hover and inactive states like your other button */
+#toggleTelemetryBtn:hover:not(.inactive) {
+  border: 1px solid white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Inactive = grey gradient */
+#toggleTelemetryBtn.inactive {
+  background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Inactive + hover = Cesium-like pale blue background and glow */
+#toggleTelemetryBtn.inactive:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+
+
+#rotationControlsContainer {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform:translateX(-50%);
+  display: flex;
+  align-items: flex-start;
+  z-index: 1000;
+  transition: transform 0.05s ease;
+  text-align:center;
+  width:194px;
+}
+#rotationControlsContainer.hidden {
+  transform: translate(-50%, 120%);
+  left: 50%;
+}
+/* Telemetry panel */
+#rotationControls {
+ font-family: 'Oxanium', sans-serif;
+	font-size:0.8em;
+    bottom: 30px;
+    padding: 5px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    color: white;
+    z-index: 1000;
+	text-align:center;
+	 background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  ); 
+}
+
+
+
+/* Button inside rotationControls */
+#toggleRotateBtn {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 195px;
+  left: 50%;
+  transform:translateX(-50%);
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  border: none;
+  background: rgba(255,0,0,0.9);
+  color: white;
+  transition: transform 0.3s ease, background 0.2s;
+  z-index: 1001;	
+}
+
+#toggleRotateBtn.fixed-right {
+  position: fixed !important;
+  left: 50% !important;
+  transform:translateX(-50%);
+  bottom: 30px !important;
+}
+
+/* Hover and inactive states like your other button */
+#toggleRotateBtn:hover:not(.inactive) {
+  border: 1px solid white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Inactive = grey gradient */
+#toggleRotateBtn.inactive {
+  background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Inactive + hover = Cesium-like pale blue background and glow */
+#toggleRotateBtn.inactive:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+
+	
+    #followToggle {
+      position: absolute;
+      z-index: 1001;
+      padding: 5px 12px;
+	  font-family: 'Oxanium', sans-serif;
+      font-size: 0.7em;
+      border: none;
+      background: linear-gradient(to bottom, rgba(116, 117, 119, 0.8) 0%, rgba(58, 68, 82, 0.8) 11%, rgba(46, 50, 56, 0.8) 46%, rgba(53, 53, 53, 0.8) 81%, rgba(53, 53, 53, 0.8) 100%); 
+      color: WHITE;
+      cursor: pointer;
+	  width:169px;
+	  height:27px;
+	  font-weight:800;
+    }
+	
+    #followToggle {
+      left: 0px;
+	  bottom:0px;
+    }
+    
+	
+	
+	#satOverheadCount {
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    background: linear-gradient(to bottom, rgba(116, 117, 119, 0.7) 0%, rgba(58, 68, 82, 0.7) 11%, rgba(46, 50, 56, 0.7) 46%, rgba(53, 53, 53, 0.7) 81%, rgba(53, 53, 53, 0.7) 100%); 
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+    max-height: 475px;       /* scrollbar appears if content exceeds this */
+    overflow-y: auto;        /* enable vertical scroll */
+    overflow-x: hidden;        /* disable horizontal scroll */
+    padding: 5px;
+	width:179px;
+	border-radius: 0 0 0 0;
+}
+#satOverheadCount a {
+  color: #00aaff;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+  transition: background 0.2s ease;
+}
+
+#satOverheadCount a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.sat-overhead-btn{
+  color: #ffffff;
+}
+.sat-overhead-btn:hover{
+  color: #ff0000;
+}
+#satOverheadCount.fullscreen-mode {
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    background: linear-gradient(to bottom, rgba(116, 117, 119, 0.7) 0%, rgba(58, 68, 82, 0.7) 11%, rgba(46, 50, 56, 0.7) 46%, rgba(53, 53, 53, 0.7) 81%, rgba(53, 53, 53, 0.7) 100%); 
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+    max-height: 595px;       /* scrollbar appears if content exceeds this */
+    overflow-y: auto;        /* enable vertical scroll */
+    overflow-x: hidden;        /* disable horizontal scroll */
+    padding: 5px;
+	width:179px;
+	border-radius: 0 0 0 0;
+}
+
+#satContainer{
+	position:absolute; 
+	top:50%; 
+	transform:translateY(-50%);
+	right:5px; 
+	min-width:170px; 
+	z-index:1;
+	margin:0px;
+	padding:0px;
+	font-family: 'Oxanium', sans-serif;
+}
+#satSearch{
+	width:100%; 
+	margin-bottom:5px; 
+	padding:8px 12px; 
+	box-sizing:border-box;
+	font-family: 'Oxanium', sans-serif;
+    font-size: 0.9em;
+    background: linear-gradient(to bottom, rgba(116, 117, 119, 0.7) 0%, rgba(58, 68, 82, 0.7) 11%, rgba(46, 50, 56, 0.7) 46%, rgba(53, 53, 53, 0.7) 81%, rgba(53, 53, 53, 0.7) 100%); 
+    color: #fff;
+	border:none;
+}
+div.scroller {
+  width: 300px;
+  height: auto;
+  overflow-y: scroll;
+  scrollbar-color: red rgba(0,0,0,0.7);
+  max-height:700px;
+} 
+
+#satelliteDropdown {
+      position: absolute;
+      z-index: 1001;
+      padding: 8px 12px;
+      font-size: 0.8em;
+      border: none;
+      border-radius: 4px;
+      background: linear-gradient(to bottom, rgba(116, 117, 119, 0.7) 0%, rgba(58, 68, 82, 0.7) 11%, rgba(46, 50, 56, 0.7) 46%, rgba(53, 53, 53, 0.7) 81%, rgba(53, 53, 53, 0.7) 100%); 
+      color: WHITE;
+      cursor: pointer;
+	  font-family: 'Oxanium', sans-serif;
+    }
+#satelliteDropdown {
+      top: 50px;
+    left: 50%;
+    transform: translate(-50%);
+    width: auto;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 12px;
+	font-family:Oxanium;
+    }
+	#satelliteDropdown:hover {
+      text-decoration:none;
+	  font-family:Oxanium;
+    }
+
+
+#hardwareOverlay{
+display: none;
+  position: fixed;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  width: 600px;
+  height: 400px;
+  border: 2px solid #333;
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    background: linear-gradient(to bottom, rgba(116, 117, 119, 0.7) 0%, rgba(58, 68, 82, 0.7) 11%, rgba(46, 50, 56, 0.7) 46%, rgba(53, 53, 53, 0.7) 81%, rgba(53, 53, 53, 0.7) 100%); 
+	border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+  z-index: 999;	
+}
+#closeIframe:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+#closeIframe{
+	position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+	background: rgba(0,0,0,0.5);
+	color:white;
+}
+
+#area-info{
+    position: absolute;
+    bottom: 33px;
+    right: 5px;
+    padding: 10px;
+    background:none;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+    z-index: 1000;
+	font-family: 'Oxanium', sans-serif;
+}
+
+ #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+	  background:white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+	  font-family:Oxanium;
+    }
+
+    #cesiumContainer {
+      width: 100%;
+      height: 100%;
+      display: none; /* Hidden until Cesium viewer is ready */
+    }
+	
+.cesium-button.fullscreen-button {
+    /* Add your custom styles here */
+    position: fixed; /* Example: to float over the toolbar */
+    margin-right:100px;
+    z-index: 10000; /* Ensure it's above other toolbar elements */
+}
+#fullscreen-button {
+    position: absolute;
+    top:5px;
+    margin-right: -40px;
+	border:none;
+    box-sizing: border-box;
+    transition: transform .3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;             /* Remove default padding */
+    fill: #fff;
+	border-radius:5px;
+	text-decoration:none;
+	background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+}
+
+#fullscreen-button:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button:hover:not(.inactive) {
+  border: 0px solid white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Inactive = grey gradient */
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button.fullscreen-button .inactive {
+  background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Inactive + hover = Cesium-like pale blue background and glow */
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button.inactive:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button .active {
+  background: #ff0000 !important; /* solid bright red, resets gradient */
+  background-image: none !important; /* remove any gradient */
+  color: white !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* When active button is hovered */
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button .active:hover {
+  border: 0px solid white !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Hide second icon by default */
+#fullscreen-button svg:nth-child(2) { 
+    display: none;
+}
+
+/* Hide first icon when fullscreen */
+[fullscreen] #fullscreen-button svg:nth-child(1) {
+    display: none;
+}
+
+/* Show second icon when fullscreen */
+[fullscreen] #fullscreen-button svg:nth-child(2) {
+    display: inline-block;
+}
+
+/* Make SVGs take full button size */
+#fullscreen-button svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Optional: prevent SVG pointer events to ensure whole button catches clicks */
+#fullscreen-button svg {
+    pointer-events: none;
+}
+#sun-info{
+padding: 5px; 
+color: white; 
+position: absolute; 
+bottom: 180px; 
+left: 0px; 
+z-index:1001;	
+font-size: 0.9em;
+font-family: 'Oxanium', sans-serif;
+}
+#sun-info.fullscreen-mode{
+padding: 5px; 
+color: white; 
+position: absolute; 
+bottom: 300px; 
+left: 0px; 
+z-index:1001;	
+font-size: 0.9em;
+font-family: 'Oxanium', sans-serif;
+}
+	input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 15px;
+  background: black;
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+  height: 15px;
+  background: black;
+  border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  height: 15px;
+  width: 15px;
+  background: black;
+  border-radius: 50%;
+  border: 2px solid #f00;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #f00;
+}
+
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  background: black;
+  border-radius: 50%;
+  border: 1px solid #f00;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #f00;
+}
+
+.range {
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  height: 4rem;
+  width: 80%;
+  background: black;
+  padding: 0px 10px;
+}
