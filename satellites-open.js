@@ -16,7 +16,7 @@ let currentSatelliteName = "ISS"; // default or initial satellite name
 const basicSatelliteIcon = 'favicon.png'; // Replace with your PNG URL
 const starlinkDefaultModelUri = 'starlink_spacex_satellite.glb';
 const default3DModelUri = 'geolocation.glb'; // Your 3D model file URI
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3YmYyOGQyNS1hNDRiLTRiMjMtYTU5Zi03Y2Q5YWY4NjNkOTIiLCJpZCI6MTEyNzQwLCJpYXQiOjE3NjQ4NDQ0Nzl9.Oqq5I0a4wgdg1X6MAfcqUyeZzgl39XR00pH4UIZRV6s';
+Cesium.Ion.defaultAccessToken = 'addyourtoken';
 
 async function init() {
 	
@@ -1021,3 +1021,4 @@ function updateAreaInfo(satLat, satLon) {
     };
 	
     
+
