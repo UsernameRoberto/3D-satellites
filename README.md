@@ -20,7 +20,10 @@ Update Cesium source paths to match your HTTPS domain:
 
 Download the Cesium engine from:
 <script src="https://www.yourdomainname.com/Build/Cesium/Cesium.js"></script>
-Please download Build Cesium Ion engine from here https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
+
+Please download Build Cesium Ion engine from here just to be sure everything is working OK and the version is right.
+
+https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
 
 🛰️ III. ISS 3D Model (GLB)
 
@@ -126,6 +129,6 @@ Designed as a 3D satellite visualization counterpart to our Live Air Traffic Con
 
 I don't mind if you add or remove anything you like. I just share because it seems like you care =)
 
-Best whishes from Slovenia
+Best whishes from Slovenia and thank you Cesium Ion. Your engine is PURE MAGIC. 
 
-Roberto
+by Roberto with ❤️
