@@ -21,7 +21,7 @@ Update Cesium source paths to match your HTTPS domain:
 Download the Cesium engine from:
 <script src="https://www.yourdomainname.com/Build/Cesium/Cesium.js"></script>
 
-Please download Build Cesium Ion engine from here just to be sure everything is working OK and the version is right.
+Please download Build Cesium Ion engine from here just to be sure everything is working OK
 
 https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
 
