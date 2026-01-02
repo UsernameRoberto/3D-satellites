@@ -37,6 +37,7 @@ Do not nest Cesium builds
 
 Cesium requires HTTPS
 
+Click anywhere on globe to count the number of satellites overhead =)
 
 🔄 IV. Satellite TLE Update System
 
