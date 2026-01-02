@@ -1,0 +1,8 @@
+<Files "update-tle.php">
+    Order allow,deny
+    Deny from all
+</Files>
+<Files "update-iss.php">
+    Order allow,deny
+    Deny from all
+</Files>
